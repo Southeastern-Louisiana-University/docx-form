@@ -7,4 +7,4 @@ def test_version():
 
 def test_docx_form():
     docx_form = DocxForm("path")
-    assert docx_form.path == "path"
+    assert docx_form.file_path == "path"
