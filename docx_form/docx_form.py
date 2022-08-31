@@ -1,3 +1,7 @@
+from zipfile import ZipFile
+from lxml import etree
+
+
 class DocxForm:
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
@@ -9,5 +13,4 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    docx_form = DocxForm("bob")
-    docx_form.print_path()
+    ...
