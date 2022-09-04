@@ -1,11 +1,11 @@
-# This workflow runs tests on pull requests to the main branch.
+# This workflow deploys to PyPi
 
-name: Test Pull Request
+name: Deploy to PyPi
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "hello-world-main" branch
-  pull_request:
+  push:
     branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -14,7 +14,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "test_pull_request"
-  test_pull_request:
+  deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -36,5 +36,8 @@ jobs:
       # Install Dependencies
       - run: poetry install
       
-      # Run Tests
-      - run: poetry run pytest
+      # Build Package
+      - run: poetry build
+
+      # Deploy to PyPi
+      - run: poetry publish -u __token__ -p ${{ secrets.PYPI_TOKEN }}
