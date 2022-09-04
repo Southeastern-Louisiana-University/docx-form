@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "docx-form"
+version = "0.1.0"
+description = "DO NOT USE, THIS IS A WORK IN PROGRESS -- A library that allows the editing of form XML components in .docx files."
+authors = ["Reece Bourgeois <reecebourgeois@gmail.com>", "Daniel Howard <daniel.howard@selu.edu>", "Robert Herbert <robert.herbert@selu.edu>", "Ryan McClelen <ryan.mcclelen@selu.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pytest = "^7.1.2"
+lxml = "^4.9.1"
+
+[tool.poetry.dev-dependencies]
+black = {version = "^22.6.0", allow-prereleases = true}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
