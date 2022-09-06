@@ -3,6 +3,7 @@ from lxml import etree
 
 Element = etree._Element
 
+
 class DocxForm:
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
@@ -43,7 +44,9 @@ if __name__ == "__main__":
                         # Determine the type of the field
                         grandchild_elements: list[Element] = child_tag.getchildren()
                         # Convert the Element object array to an array of strings
-                        grandchild_tags: list[str] = [tag.tag for tag in grandchild_elements]
+                        grandchild_tags: list[str] = [
+                            tag.tag for tag in grandchild_elements
+                        ]
 
                         # If grandchild_tags contains the <w:date> tag, then it is a date picker field
                         if f"{xml_prefix}date" in grandchild_tags:
