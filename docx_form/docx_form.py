@@ -2,33 +2,25 @@ from zipfile import ZipFile
 from lxml import etree
 import re
 
+
 Element = etree._Element
 
 
 class DocxForm:
     def __init__(self, file_path: str) -> None:
+        self.file_path = self.__verify_path(file_path)
 
-        self.file_path = self.verify_path(file_path)
-
-    def print_path(self) -> None:
-        print(self.file_path)
-
-    def verify_path(self, file_path: str):
+    def __verify_path(self, file_path: str):
         # regex to check for docx extension in file path
-
         verify = re.compile("\.docx")
 
-        if verify.search(file_path):
-            print("File is docx")
-
-        else:
+        if not verify.search(file_path):
             raise Exception("File is not docx")
 
         # File path verify with file open attempt
 
         try:
             open(file_path, "a")
-            print("File Path is valid")
 
         except OSError:
             ...
@@ -40,6 +32,9 @@ class DocxForm:
                 myfile.read()
 
         return file_path
+
+    def print_path(self) -> None:
+        print(self.file_path)
 
 
 # Use this for debugging, then move to a test file.
