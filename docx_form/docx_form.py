@@ -6,6 +6,13 @@ import re
 class DocxForm:
     def __init__(self, file_path: str) -> None:
         self.file_path = file_path
+
+        self.verify_path()
+
+    def print_path(self) -> None:
+        print(self.file_path)
+
+    def verify_path(self):
         # regex to check for docx extension in file path
 
         verify = re.compile("\.docx")
@@ -16,7 +23,7 @@ class DocxForm:
         else:
             raise Exception("File is not docx")
 
-        # File path verify 
+        # File path verify with file open attempt
 
         try:
             open(self.file_path, "a")
@@ -25,14 +32,11 @@ class DocxForm:
         except OSError:
             raise Exception("File Path is not valid")
 
-        # Zipfile ops at self.file_path
-        
+            # Zipfile ops at self.file_path and open xml
+
         with ZipFile(self.file_path) as myzip:
             with myzip.open("word/document.xml") as myfile:
                 print(myfile.read())
-
-    def print_path(self) -> None:
-        print(self.file_path)
 
 
 # Use this for debugging, then move to a test file.
