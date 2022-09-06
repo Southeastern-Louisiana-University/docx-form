@@ -16,6 +16,8 @@ class DocxForm:
         else:
             raise Exception("File is not docx")
 
+        # File path verify 
+
         try:
             open(self.file_path, "a")
             print("File Path is valid")
@@ -23,6 +25,8 @@ class DocxForm:
         except OSError:
             raise Exception("File Path is not valid")
 
+        # Zipfile ops at self.file_path
+        
         with ZipFile(self.file_path) as myzip:
             with myzip.open("word/document.xml") as myfile:
                 print(myfile.read())
