@@ -4,7 +4,10 @@ from lxml import etree
 import re
 
 # Local Imports (don't forget the "." in front of the module name)
-from .enums import TagType
+try:
+    from enums import TagType
+except ImportError:
+    from .enums import TagType
 
 # Type Aliases
 Element = etree._Element
