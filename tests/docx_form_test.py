@@ -1,10 +1,8 @@
-from docx_form import __version__, DocxForm
-
-
-def test_version():
-    assert __version__ == "0.1.0"
+from docx_form import DocxForm
 
 
 def test_docx_form():
-    docx_form = DocxForm("path")
-    assert docx_form.file_path == "path"
+    path: str = "./tests/test.docx"  # Note: Poetry executes tests from the root directory, so account for this with file paths
+    docx_form = DocxForm(path)
+    assert docx_form.file_path == path
+    assert len(docx_form.content_control_forms) == 12
