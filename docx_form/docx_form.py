@@ -6,7 +6,7 @@ import re
 # Local Imports
 try:
     from enums import TagType
-    from features import (
+    from content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
         ComboBoxContentControl,
@@ -18,7 +18,7 @@ try:
     from type_aliases import Element
 except ImportError:
     from .enums import TagType
-    from .features import (
+    from .content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
         ComboBoxContentControl,
