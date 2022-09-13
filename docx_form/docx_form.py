@@ -3,26 +3,60 @@ from zipfile import ZipFile
 from lxml import etree
 import re
 
-# Local Imports (don't forget the "." in front of the module name)
+# Local Imports
 try:
     from enums import TagType
+    from features import (
+        PlainTextContentControl,
+        RichTextContentControl,
+        ComboBoxContentControl,
+        DropDownListContentControl,
+        CheckBoxContentControl,
+        DatePickerContentControl,
+    )
+    from constants import XML_PREFIX
+    from type_aliases import Element
 except ImportError:
     from .enums import TagType
+    from .features import (
+        PlainTextContentControl,
+        RichTextContentControl,
+        ComboBoxContentControl,
+        DropDownListContentControl,
+        CheckBoxContentControl,
+        DatePickerContentControl,
+    )
+    from .constants import XML_PREFIX
+    from .type_aliases import Element
 
-# Type Aliases
-Element = etree._Element
-
-# Constants
-XML_PREFIX = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+# Local Type Aliases
+ContentControl = (
+    CheckBoxContentControl
+    | RichTextContentControl
+    | ComboBoxContentControl
+    | DatePickerContentControl
+    | DropDownListContentControl
+    | PlainTextContentControl
+)
 
 
 class DocxForm:
-    def __init__(self, file_path: str) -> None:
+    def __init__(self, file_path: str):
         self.file_path: str = self.__verify_path(file_path)
-        # Note: this will become a list[DocxContentControl] in a later version
+        self.raw_xml: str = self.__get_raw_xml()
         self.content_control_forms: list[
-            Element
+            ContentControl
         ] = self.__get_all_content_control_forms()
+
+    def __get_raw_xml(self) -> str:
+        with ZipFile(self.file_path) as document:
+            # Put the raw xml into an xml file for testing
+            full_path = ""
+            if len(full_path) > 0:
+                with open(full_path, "wb") as f:
+                    f.write(document.read("word/document.xml"))
+
+            return document.read("word/document.xml").decode("utf-8")
 
     def __verify_path(self, file_path: str):
         # regex to check for docx extension in file path
@@ -47,10 +81,10 @@ class DocxForm:
 
         return file_path
 
-    def __get_all_content_control_forms(self) -> list[Element]:
+    def __get_all_content_control_forms(self) -> list[ContentControl]:
         with ZipFile(self.file_path) as document:
             # Return variable
-            content_control_forms: list[Element] = []
+            content_control_forms: list[ContentControl] = []
             # The root of the document
             root: Element = etree.XML(document.read("word/document.xml"))
             # The body of the document
@@ -82,7 +116,7 @@ class DocxForm:
     # Note: this will have a specific return type in a later version that corresponds to the type of content control
     def __determine_content_control(
         self, parent_tag: Element, tag_type: TagType
-    ) -> Element | None:
+    ) -> ContentControl | None:
         match tag_type:
             # Loop through all tags within the <w:sdt> tag
             case TagType.SDT:
@@ -98,33 +132,25 @@ class DocxForm:
 
                         # If grandchild_tags contains the <w:date> tag, then it is a date picker field
                         if f"{XML_PREFIX}date" in grandchild_tags:
-                            print("Date Picker Content Control")
-                            return parent_tag  # TODO: Replace with a DatePickerContentControl object
+                            return DatePickerContentControl(parent_tag)
                         # If grandchild_tags contains the <w:dropDownList> tag, then it is a drop down list field
                         elif f"{XML_PREFIX}dropDownList" in grandchild_tags:
-                            print("Drop-Down Content Control")
-                            return parent_tag  # TODO: Replace with a DropDownListContentControl object
+                            return DropDownListContentControl(parent_tag)
                         # If grandchild_tags contains the <w:comboBox> tag, then it is a combo box field
                         elif f"{XML_PREFIX}comboBox" in grandchild_tags:
-                            print("Combo Box Content Control")
-                            return parent_tag  # TODO: Replace with a ComboBoxContentControl object
+                            return ComboBoxContentControl(parent_tag)
                         # If grandchild_tags contains the <w:text> tag, then it is a plain text field
                         elif f"{XML_PREFIX}text" in grandchild_tags:
-                            print("Plain Text Content Control")
-                            return parent_tag  # TODO: Replace with a PlainTextContentControl object
+                            return PlainTextContentControl(parent_tag)
                         # Otherwise, it is a rich text field
                         else:
-                            print("Rich Text Content Control")
-                            return parent_tag  # TODO: Replace with a RichTextContentControl object
+                            return RichTextContentControl(parent_tag)
 
             # Check if the first child of the <w:p> tag is a <w:sdt> tag
             case TagType.P:
                 first_child: str = parent_tag.getchildren()[0].tag
                 if first_child == f"{XML_PREFIX}sdt":
-                    print("Check Box Content Control")
-                    return (
-                        parent_tag  # TODO: Replace with a CheckBoxContentControl object
-                    )
+                    return CheckBoxContentControl(parent_tag.getchildren()[0])
                 else:
                     return None
 
