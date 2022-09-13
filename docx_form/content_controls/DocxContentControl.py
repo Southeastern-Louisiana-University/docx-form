@@ -8,8 +8,9 @@ except ImportError:
 
 
 class DocxContentControl:
-    def __init__(self, root: Element):
+    def __init__(self, root: Element, file_path: str):
         self.root = root
+        self.file_path = file_path
         self.id = self.__get_id()
         self.text = self.__get_text()
 

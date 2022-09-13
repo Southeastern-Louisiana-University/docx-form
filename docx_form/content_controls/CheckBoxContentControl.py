@@ -8,5 +8,5 @@ except ImportError:
 
 
 class CheckBoxContentControl(DocxContentControl):
-    def __init__(self, root: Element):
-        super().__init__(root)
+    def __init__(self, root: Element, file_path: str):
+        super().__init__(root, file_path)
