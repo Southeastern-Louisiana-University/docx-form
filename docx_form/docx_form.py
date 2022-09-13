@@ -51,7 +51,7 @@ class DocxForm:
     def __get_raw_xml(self) -> str:
         with ZipFile(self.file_path) as document:
             # Put the raw xml into an xml file for testing
-            full_path = "C:/Users/reece/OneDrive/Desktop/test.xml"
+            full_path = ""
             if len(full_path) > 0:
                 with open(full_path, "wb") as f:
                     f.write(document.read("word/document.xml"))
@@ -158,8 +158,4 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    path = "C:/Users/reece/git_repos/docx-form/tests/test.docx"
-    docx_form = DocxForm(path)
-    plain_text_1 = docx_form.content_control_forms[2]
-
-    plain_text_1.set_text("woop woop")
+    ...
