@@ -135,7 +135,9 @@ class DocxForm:
                             return DatePickerContentControl(parent_tag, self.file_path)
                         # If grandchild_tags contains the <w:dropDownList> tag, then it is a drop down list field
                         elif f"{XML_PREFIX}dropDownList" in grandchild_tags:
-                            return DropDownListContentControl(parent_tag, self.file_path)
+                            return DropDownListContentControl(
+                                parent_tag, self.file_path
+                            )
                         # If grandchild_tags contains the <w:comboBox> tag, then it is a combo box field
                         elif f"{XML_PREFIX}comboBox" in grandchild_tags:
                             return ComboBoxContentControl(parent_tag, self.file_path)
@@ -150,7 +152,9 @@ class DocxForm:
             case TagType.P:
                 first_child: str = parent_tag.getchildren()[0].tag
                 if first_child == f"{XML_PREFIX}sdt":
-                    return CheckBoxContentControl(parent_tag.getchildren()[0], self.file_path)
+                    return CheckBoxContentControl(
+                        parent_tag.getchildren()[0], self.file_path
+                    )
                 else:
                     return None
 
