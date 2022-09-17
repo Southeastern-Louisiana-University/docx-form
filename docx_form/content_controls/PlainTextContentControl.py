@@ -14,10 +14,22 @@ except ImportError:
 
 
 class PlainTextContentControl(DocxContentControl):
+    """
+    This class contains all properties and methods for a Plain Text content control.
+
+    :param DocxContentControl: This class extends the DocxContentControl class
+    """
+
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
 
     def set_text(self, new_text: str):
+        """
+        This method sets the text of a Plain Text content control.
+
+        :param str new_text: The new text to set
+        """
+
         # Replace .docx with -modified.docx in the file path
         new_path = self.file_path.replace(".docx", "-modified.docx")
 
