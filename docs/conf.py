@@ -8,6 +8,10 @@ import sys
 
 sys.path.insert(0, os.path.abspath(".."))
 
+# To build the docs (Windows):
+# 1. poetry run sphinx-apidoc -o . ..
+# 2. poetry run make.bat html
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
