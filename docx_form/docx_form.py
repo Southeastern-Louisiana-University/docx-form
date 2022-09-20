@@ -62,7 +62,9 @@ class DocxForm:
         ] = self.__get_all_content_control_forms()
 
     def save(self):
-        # Saves to a new file
+        """
+        This method saves the changes to a new document.
+        """
 
         # Replace .docx with -modified.docx in the file path
         new_path = self.file_path.replace(".docx", "-modified.docx")
@@ -212,6 +214,7 @@ class DocxForm:
                     )
                 else:
                     return None
+
 
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
