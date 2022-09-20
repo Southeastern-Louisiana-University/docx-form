@@ -1,5 +1,4 @@
 # Package Imports
-from zipfile import ZipFile
 from lxml import etree
 
 # Local Imports
