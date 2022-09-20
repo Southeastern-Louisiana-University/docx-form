@@ -15,6 +15,7 @@ try:
         DatePickerContentControl,
     )
     from constants import XML_PREFIX
+    from globals import Raw_XML
     from type_aliases import Element
 except ImportError:
     from .enums import TagType
@@ -27,6 +28,7 @@ except ImportError:
         DatePickerContentControl,
     )
     from .constants import XML_PREFIX
+    from .globals import Raw_XML
     from .type_aliases import Element
 
 # Local Type Aliases
@@ -43,10 +45,25 @@ ContentControl = (
 class DocxForm:
     def __init__(self, file_path: str):
         self.file_path: str = self.__verify_path(file_path)
-        self.raw_xml: str = self.__get_raw_xml()
+        Raw_XML.raw_xml = self.__get_raw_xml()
         self.content_control_forms: list[
             ContentControl
         ] = self.__get_all_content_control_forms()
+
+    def save(self):
+        # Saves to a new file
+
+        # Replace .docx with -modified.docx in the file path
+        new_path = self.file_path.replace(".docx", "-modified.docx")
+
+        with ZipFile(self.file_path, "a") as old_doc, ZipFile(new_path, "w") as new_doc:
+            # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
+            doc_list = old_doc.infolist()
+            for item in doc_list:
+                if item.filename != "word/document.xml":
+                    new_doc.writestr(item, old_doc.read(item.filename))
+            # Write changes to new docx
+            new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
     def __get_raw_xml(self) -> str:
         with ZipFile(self.file_path) as document:
@@ -56,7 +73,9 @@ class DocxForm:
                 with open(full_path, "wb") as f:
                     f.write(document.read("word/document.xml"))
 
-            return document.read("word/document.xml").decode("utf-8")
+            return document.read(
+                "word/document.xml"
+            )  # .decode("utf-8") this creates problems for some reason #
 
     def __verify_path(self, file_path: str):
         # regex to check for docx extension in file path
