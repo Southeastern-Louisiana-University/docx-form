@@ -8,5 +8,11 @@ except ImportError:
 
 
 class CheckBoxContentControl(DocxContentControl):
+    """
+    This class contains the properties and functions associated with the Check Box content control.
+
+    :param DocxContentControl: This class extends DocxContentControl
+    """
+
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)

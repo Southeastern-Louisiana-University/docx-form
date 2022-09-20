@@ -15,6 +15,7 @@ try:
         DatePickerContentControl,
     )
     from constants import XML_PREFIX
+    from globals import Raw_XML
     from type_aliases import Element
 except ImportError:
     from .enums import TagType
@@ -27,6 +28,7 @@ except ImportError:
         DatePickerContentControl,
     )
     from .constants import XML_PREFIX
+    from .globals import Raw_XML
     from .type_aliases import Element
 
 # Local Type Aliases
@@ -41,24 +43,67 @@ ContentControl = (
 
 
 class DocxForm:
+    """
+    This is the one and only entry point for the DocxForm package.
+    DocxForm holds all content controls for a given document and allows read and write operations on the document.
+    """
+
     def __init__(self, file_path: str):
+        """
+        This initalizes the DocxForm class.
+
+        :param str file_path: The path to the document
+        """
+
         self.file_path: str = self.__verify_path(file_path)
-        self.raw_xml: str = self.__get_raw_xml()
+        Raw_XML.raw_xml = self.__get_raw_xml()
         self.content_control_forms: list[
             ContentControl
         ] = self.__get_all_content_control_forms()
 
+    def save(self):
+        """
+        This method saves the changes to a new document.
+        """
+
+        # Replace .docx with -modified.docx in the file path
+        new_path = self.file_path.replace(".docx", "-modified.docx")
+
+        with ZipFile(self.file_path, "a") as old_doc, ZipFile(new_path, "w") as new_doc:
+            # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
+            doc_list = old_doc.infolist()
+            for item in doc_list:
+                if item.filename != "word/document.xml":
+                    new_doc.writestr(item, old_doc.read(item.filename))
+            # Write changes to new docx
+            new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
+
     def __get_raw_xml(self) -> str:
+        """
+        This method returns the raw xml of the document.
+
+        :return str: The raw xml of the document
+        """
         with ZipFile(self.file_path) as document:
             # Put the raw xml into an xml file for testing
+            # TODO: Delete when publishing package
             full_path = ""
             if len(full_path) > 0:
                 with open(full_path, "wb") as f:
                     f.write(document.read("word/document.xml"))
 
-            return document.read("word/document.xml").decode("utf-8")
+            return document.read(
+                "word/document.xml"
+            )  # .decode("utf-8") this creates problems for some reason #
 
     def __verify_path(self, file_path: str):
+        """
+        This method verifies that the file path is valid.
+
+        :param str file_path: The path to the document
+        :raises Exception: If the file path is not to a .docx file
+        :return _type_: The file path
+        """
         # regex to check for docx extension in file path
         verify = re.compile("\\.docx")
 
@@ -82,6 +127,11 @@ class DocxForm:
         return file_path
 
     def __get_all_content_control_forms(self) -> list[ContentControl]:
+        """
+        This method returns all content control forms in the document.
+
+        :return list[ContentControl]:
+        """
         with ZipFile(self.file_path) as document:
             # Return variable
             content_control_forms: list[ContentControl] = []
@@ -117,6 +167,13 @@ class DocxForm:
     def __determine_content_control(
         self, parent_tag: Element, tag_type: TagType
     ) -> ContentControl | None:
+        """
+        This method determines the type of content control and returns the appropriate object.
+
+        :param Element parent_tag: The parent tag of the content control. This will be a <w:sdt> tag or a <w:p> tag.
+        :param TagType tag_type: The type of tag that the content control is in. This will be either SDT or P.
+        :return ContentControl | None: The content control object
+        """
         match tag_type:
             # Loop through all tags within the <w:sdt> tag
             case TagType.SDT:
@@ -162,4 +219,8 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    ...
+    path = "C:/Users/reece/git_repos/docx-form/tests/test.docx"
+    form = DocxForm(path)
+
+    plain_text_1 = form.content_control_forms[2]
+    plain_text_1.set_text("THIS WORKED!!!")
