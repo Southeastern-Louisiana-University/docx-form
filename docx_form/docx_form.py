@@ -98,7 +98,7 @@ class DocxForm:
 
     def __verify_path(self, file_path: str):
         # regex to check for docx extension in file path
-        verify = re.compile("\\.docx")
+        verify = re.compile("\\.docx$")
 
         if not verify.search(file_path):
             raise Exception("File is not docx")
