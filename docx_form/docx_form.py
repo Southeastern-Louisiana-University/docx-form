@@ -58,14 +58,18 @@ class DocxForm:
             with ZipFile(self.file_path, "a") as doc, ZipFile(
                 temp_path, "w"
             ) as temp_doc:
-                # Copy all contents ecxept the "word/document.xml" file from the docx to the temp docx
+                # Copy all contents except the "word/document.xml" file from the docx to the temp docx
                 doc_list = doc.infolist()
                 for item in doc_list:
                     if item.filename != "word/document.xml":
                         temp_doc.writestr(item, doc.read(item.filename))
                 # Write changes to new docx
                 temp_doc.writestr("word/document.xml", Raw_XML.raw_xml)
+                
+            # Delete the original docx
             os.remove(self.file_path)
+
+            # Rename the temporary docx to match the original name
             os.renames(temp_path, self.file_path)
 
         # Saves to a new file
@@ -76,7 +80,7 @@ class DocxForm:
             with ZipFile(self.file_path, "a") as old_doc, ZipFile(
                 new_path, "w"
             ) as new_doc:
-                # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
+                # Copy all contents except the "word/document.xml" file from the old docx to the new docx
                 doc_list = old_doc.infolist()
                 for item in doc_list:
                     if item.filename != "word/document.xml":
