@@ -50,9 +50,9 @@ class DocxForm:
             ContentControl
         ] = self.__get_all_content_control_forms()
 
-    def save(self, name=None):
+    def save(self, destination_path=None):
         # If no name is given the original docx will be overwritten
-        if name == None or name == " " or name == "":
+        if destination_path == None or destination_path == " " or destination_path == "":
             temp_path = self.file_path.replace(".docx", "-temp.docx")
 
             with ZipFile(self.file_path, "a") as doc, ZipFile(
@@ -72,11 +72,10 @@ class DocxForm:
             # Rename the temporary docx to match the original name
             os.renames(temp_path, self.file_path)
 
-        # Saves to a new file -- if the name passed in is 'DocxForm.docx' the file will be named 'DocxForm.docx.docx'
+        # Saves to a new file -- uses path as destination, relative path does work
         else:
-            # Replace file name with new file name in the path
-            replace = re.compile("[\w\s\.\-\(\):]*\.docx$")
-            new_path = re.sub(replace, name, self.file_path) + ".docx"
+            # Replace document path with the destination path
+            new_path = destination_path
 
             with ZipFile(self.file_path, "a") as old_doc, ZipFile(
                 new_path, "w"
