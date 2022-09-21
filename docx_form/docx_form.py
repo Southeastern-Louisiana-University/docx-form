@@ -132,25 +132,25 @@ class DocxForm:
 
                         # If grandchild_tags contains the <w:date> tag, then it is a date picker field
                         if f"{XML_PREFIX}date" in grandchild_tags:
-                            return DatePickerContentControl(parent_tag)
+                            return DatePickerContentControl(parent_tag, self.file_path)
                         # If grandchild_tags contains the <w:dropDownList> tag, then it is a drop down list field
                         elif f"{XML_PREFIX}dropDownList" in grandchild_tags:
-                            return DropDownListContentControl(parent_tag)
+                            return DropDownListContentControl(parent_tag, self.file_path)
                         # If grandchild_tags contains the <w:comboBox> tag, then it is a combo box field
                         elif f"{XML_PREFIX}comboBox" in grandchild_tags:
-                            return ComboBoxContentControl(parent_tag)
+                            return ComboBoxContentControl(parent_tag, self.file_path)
                         # If grandchild_tags contains the <w:text> tag, then it is a plain text field
                         elif f"{XML_PREFIX}text" in grandchild_tags:
-                            return PlainTextContentControl(parent_tag)
+                            return PlainTextContentControl(parent_tag, self.file_path)
                         # Otherwise, it is a rich text field
                         else:
-                            return RichTextContentControl(parent_tag)
+                            return RichTextContentControl(parent_tag, self.file_path)
 
             # Check if the first child of the <w:p> tag is a <w:sdt> tag
             case TagType.P:
                 first_child: str = parent_tag.getchildren()[0].tag
                 if first_child == f"{XML_PREFIX}sdt":
-                    return CheckBoxContentControl(parent_tag.getchildren()[0])
+                   return CheckBoxContentControl(parent_tag.getchildren()[0], self.file_path)
                 else:
                     return None
 
@@ -158,4 +158,10 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    ...
+    test = DocxForm("C:/Users/2006S/411-PythonProject/docx-form/tests/test.docx")
+    test123 = test.content_control_forms
+    for item in test123:
+            print(item) 
+    checkbox1 = test.content_control_forms[4]
+    checkbox2 = test.content_control_forms[5]
+    checkbox2.setCheckBox(False)
