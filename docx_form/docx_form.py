@@ -53,31 +53,35 @@ class DocxForm:
     def save(self, file_append=None):
 
         if file_append == None:
-            temp_path = self.file_path.replace(".docx","-temp.docx")
+            temp_path = self.file_path.replace(".docx", "-temp.docx")
 
-            with ZipFile(self.file_path, "a") as doc, ZipFile(temp_path, "w") as temp_doc:
-            # Copy all contents ecxept the "word/document.xml" file from the docx to the temp docx
+            with ZipFile(self.file_path, "a") as doc, ZipFile(
+                temp_path, "w"
+            ) as temp_doc:
+                # Copy all contents ecxept the "word/document.xml" file from the docx to the temp docx
                 doc_list = doc.infolist()
                 for item in doc_list:
                     if item.filename != "word/document.xml":
                         temp_doc.writestr(item, doc.read(item.filename))
-            # Write changes to new docx
+                # Write changes to new docx
                 temp_doc.writestr("word/document.xml", Raw_XML.raw_xml)
             os.remove(self.file_path)
             os.renames(temp_path, self.file_path)
-        
+
         # Saves to a new file
-        else: 
+        else:
             # Replace .docx with "file_append.docx" in the file path
             new_path = self.file_path.replace(".docx", file_append + ".docx")
 
-            with ZipFile(self.file_path, "a") as old_doc, ZipFile(new_path, "w") as new_doc:
-            # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
+            with ZipFile(self.file_path, "a") as old_doc, ZipFile(
+                new_path, "w"
+            ) as new_doc:
+                # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
                 doc_list = old_doc.infolist()
                 for item in doc_list:
                     if item.filename != "word/document.xml":
                         new_doc.writestr(item, old_doc.read(item.filename))
-            # Write changes to new docx
+                # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
     def __get_raw_xml(self) -> str:
@@ -196,8 +200,4 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    document = DocxForm("")
-    document.content_control_forms[2].set_text("Indeed")
-    document.content_control_forms[3].set_text("Hello World")
-    # document.save()
-    # document.save("-modified")
+    ...
