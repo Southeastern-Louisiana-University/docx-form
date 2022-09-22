@@ -6,7 +6,7 @@ name: Deploy to PyPi
 on:
   # Triggers the workflow on push or pull request events but only for the "hello-world-main" branch
   push:
-    branches: [ "main" ]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,14 +28,14 @@ jobs:
         uses: actions/setup-python@v4.2.0
         with:
           python-version: 3.10.6
-      
+
       # Setup Poetry
       - name: Setup Poetry
         uses: Gr1N/setup-poetry@v7
-        
+
       # Install Dependencies
       - run: poetry install
-      
+
       # Build Package
       - run: poetry build
 
