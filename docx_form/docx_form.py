@@ -1,7 +1,7 @@
 # Package Imports
 from zipfile import ZipFile
 from lxml import etree
-import re
+import re, os
 
 # Local Imports
 try:
@@ -61,25 +61,48 @@ class DocxForm:
             ContentControl
         ] = self.__get_all_content_control_forms()
 
-    def save(self):
-        """
-        This method saves the changes to a new document.
-        """
+    def save(self, destination_path=None):
+        # If no name is given the original docx will be overwritten
+        if destination_path == None or destination_path == " " or destination_path == "":
+            temp_path = self.file_path.replace(".docx", "-temp.docx")
 
-        # Replace .docx with -modified.docx in the file path
-        new_path = self.file_path.replace(".docx", "-modified.docx")
+            with ZipFile(self.file_path, "a") as doc, ZipFile(
+                temp_path, "w"
+            ) as temp_doc:
+                # Copy all contents except the "word/document.xml" file from the docx to the temp docx
+                doc_list = doc.infolist()
+                for item in doc_list:
+                    if item.filename != "word/document.xml":
+                        temp_doc.writestr(item, doc.read(item.filename))
+                # Write changes to new docx
+                temp_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
-        with ZipFile(self.file_path, "a") as old_doc, ZipFile(new_path, "w") as new_doc:
-            # Copy all contents ecxept the "word/document.xml" file from the old docx to the new docx
-            doc_list = old_doc.infolist()
-            for item in doc_list:
-                if item.filename != "word/document.xml":
-                    new_doc.writestr(item, old_doc.read(item.filename))
-            # Write changes to new docx
-            new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
+            # Delete the original docx
+            os.remove(self.file_path)
+
+            # Rename the temporary docx to match the original name
+            os.renames(temp_path, self.file_path)
+
+        # Saves to a new file -- uses path as destination, relative path does work
+        else:
+            # Replace document path with the destination path
+            new_path = destination_path
+
+            with ZipFile(self.file_path, "a") as old_doc, ZipFile(
+                new_path, "w"
+            ) as new_doc:
+                # Copy all contents except the "word/document.xml" file from the old docx to the new docx
+                doc_list = old_doc.infolist()
+                for item in doc_list:
+                    if item.filename != "word/document.xml":
+                        new_doc.writestr(item, old_doc.read(item.filename))
+                # Write changes to new docx
+                new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
     def list_all_content_control(self):
+        # Track current array index in for loop
         pos = 0
+        # print values from each control with the index in content_control_forms
         for control in self.content_control_forms:
             print(str(pos) + ": " + control.type + ". id: " + control.id + ". text: " + control.text)
             pos = pos + 1
@@ -111,7 +134,7 @@ class DocxForm:
         :return _type_: The file path
         """
         # regex to check for docx extension in file path
-        verify = re.compile("\\.docx")
+        verify = re.compile("\\.docx$")
 
         if not verify.search(file_path):
             raise Exception("File is not docx")
