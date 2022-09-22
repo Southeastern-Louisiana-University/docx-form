@@ -100,7 +100,9 @@ class DocxForm:
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
     def list_all_content_control(self):
+        # Track current array index in for loop
         pos = 0
+        # print values from each control with the index in content_control_forms
         for control in self.content_control_forms:
             print(str(pos) + ": " + control.type + ". id: " + control.id + ". text: " + control.text)
             pos = pos + 1
