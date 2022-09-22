@@ -8,6 +8,11 @@ except ImportError:
 
 
 class DocxContentControl:
+    """
+    This is the parent class of all content controls.
+    It is responsible for getting the id and text of the content control.
+    """
+
     def __init__(self, root: Element, file_path: str):
         self.root = root
         self.file_path = file_path
