@@ -23,6 +23,7 @@ class PlainTextContentControl(DocxContentControl):
 
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
+        self.type = "Plain Text Content Control"
 
     def set_text(self, new_text: str):
         """
