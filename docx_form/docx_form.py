@@ -99,6 +99,12 @@ class DocxForm:
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
+    def list_all_content_control(self):
+        pos = 0
+        for control in self.content_control_forms:
+            print(str(pos) + ": " + control.type + ". id: " + control.id + ". text: " + control.text)
+            pos = pos + 1
+
     def __get_raw_xml(self) -> str:
         """
         This method returns the raw xml of the document.
