@@ -158,10 +158,4 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    test = DocxForm("C:/Users/2006S/411-PythonProject/docx-form/tests/test.docx")
-    test123 = test.content_control_forms
-    for item in test123:
-            print(item) 
-    checkbox1 = test.content_control_forms[4]
-    checkbox2 = test.content_control_forms[5]
-    checkbox2.setCheckBox(False)
+            ...
