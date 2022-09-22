@@ -225,8 +225,4 @@ class DocxForm:
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    path = "C:/Users/reece/git_repos/docx-form/tests/test.docx"
-    form = DocxForm(path)
-
-    plain_text_1 = form.content_control_forms[2]
-    plain_text_1.set_text("THIS WORKED!!!")
+    ...
