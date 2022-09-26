@@ -61,7 +61,7 @@ class DocxForm:
             ContentControl
         ] = self.__get_all_content_control_forms()
 
-    def save(self, destination_path=None):
+    def save(self, destination_path: str | None = None):
         """
         This method saves the document to the destination path if a path is given.
         If not, the original file is overwritten.
