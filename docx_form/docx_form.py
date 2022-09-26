@@ -109,7 +109,7 @@ class DocxForm:
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
-    def list_all_content_control(self):
+    def list_all_content_controls(self):
         """
         This method prints all content controls in the document.
         """
