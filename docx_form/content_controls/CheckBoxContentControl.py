@@ -1,9 +1,7 @@
 # Local Imports
-from calendar import c
 from .DocxContentControl import DocxContentControl
 
 # Package Imports
-from zipfile import ZipFile
 from lxml import etree
 
 try:
@@ -21,9 +19,10 @@ class CheckBoxContentControl(DocxContentControl):
 
     :param DocxContentControl: This class extends DocxContentControl
     """
-    
+
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
+        self.type = "CheckBox Content Control"
 
     def setCheckBox(self, boolean: bool):
         # Set values according to the boolean passed in

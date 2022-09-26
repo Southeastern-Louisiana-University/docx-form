@@ -62,8 +62,18 @@ class DocxForm:
         ] = self.__get_all_content_control_forms()
 
     def save(self, destination_path=None):
+        """
+        This method saves the document to the destination path if a path is given.
+        If not, the original file is overwritten.
+        :param str destination_path: The full path to save the file to, defaults to None
+        """
+        
         # If no name is given the original docx will be overwritten
-        if destination_path == None or destination_path == " " or destination_path == "":
+        if (
+            destination_path == None
+            or destination_path == " "
+            or destination_path == ""
+        ):
             temp_path = self.file_path.replace(".docx", "-temp.docx")
 
             with ZipFile(self.file_path, "a") as doc, ZipFile(
@@ -100,11 +110,23 @@ class DocxForm:
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
     def list_all_content_control(self):
+        """
+        This method prints all content controls in the document.
+        """
+
         # Track current array index in for loop
         pos = 0
         # print values from each control with the index in content_control_forms
         for control in self.content_control_forms:
-            print(str(pos) + ": " + control.type + ". id: " + control.id + ". text: " + control.text)
+            print(
+                str(pos)
+                + ": "
+                + control.type
+                + ". id: "
+                + control.id
+                + ". text: "
+                + control.text
+            )
             pos = pos + 1
 
     def __get_raw_xml(self) -> str:
