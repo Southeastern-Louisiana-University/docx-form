@@ -27,7 +27,7 @@ class CheckBoxContentControl(DocxContentControl):
         """
         This method sets a checkbox to checked or unchecked on a CheckBox Content Control 
 
-        :param bool boolean: Sets checkbox to checked for true and unchecked for false
+        :param bool check_value: Sets checkbox to checked for true and unchecked for false
         """
         # Set values according to the boolean passed in
         if check_value == True:
