@@ -25,9 +25,9 @@ class CheckBoxContentControl(DocxContentControl):
 
     def set_checkBox(self, check_value: bool):
         """
-        This method sets the checkbox to checked or unchecked on a CheckBox Content Control 
+        This method sets a checkbox to checked or unchecked on a CheckBox Content Control 
 
-        :param bool boolean: Sets a checked for true and unchecked for false
+        :param bool boolean: Sets checkbox to checked for true and unchecked for false
         """
         # Set values according to the boolean passed in
         if check_value == True:
