@@ -6,8 +6,7 @@ from lxml import etree
 
 try:
     from type_aliases import Element
-    from constants import XML_PREFIX
-    from constants import XML_CHECK
+    from constants import XML_PREFIX, XML_CHECK
     from globals import Raw_XML
 except ImportError:
     from ..type_aliases import Element
@@ -24,9 +23,14 @@ class CheckBoxContentControl(DocxContentControl):
         super().__init__(root, file_path)
         self.type = "CheckBox Content Control"
 
-    def setCheckBox(self, boolean: bool):
+    def set_checkBox(self, check_value: bool):
+        """
+        This method sets the checkbox to checked or unchecked on a CheckBox Content Control 
+
+        :param bool boolean: Sets a checked for true and unchecked for false
+        """
         # Set values according to the boolean passed in
-        if boolean == True:
+        if check_value == True:
             checkBoxVal = '1'
             box = '☒'
         else:
