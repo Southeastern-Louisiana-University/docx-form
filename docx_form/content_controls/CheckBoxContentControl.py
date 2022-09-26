@@ -16,6 +16,12 @@ except ImportError:
     from ..constants import XML_PREFIX, XML_CHECK
     from ..globals import Raw_XML
 class CheckBoxContentControl(DocxContentControl):
+    """
+    This class contains the properties and functions associated with the Check Box content control.
+
+    :param DocxContentControl: This class extends DocxContentControl
+    """
+    
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
 
