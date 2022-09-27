@@ -65,10 +65,9 @@ class DocxForm:
         """
         This method saves the document to the destination path if a path is given.
         If not, the original file is overwritten.
-
         :param str destination_path: The full path to save the file to, defaults to None
         """
-
+        
         # If no name is given the original docx will be overwritten
         if (
             destination_path == None
