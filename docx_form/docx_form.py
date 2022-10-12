@@ -5,7 +5,7 @@ import re, os
 
 # Local Imports
 try:
-    from enums import TagType
+    from enums import TagType, InstrTextOptions
     from content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
@@ -18,7 +18,7 @@ try:
     from globals import Raw_XML
     from type_aliases import Element
 except ImportError:
-    from .enums import TagType
+    from .enums import TagType, InstrTextOptions
     from .content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
@@ -277,9 +277,18 @@ class DocxForm:
             # This case handles all Form Field types
             case TagType.P:
                 for child in parent_tag.iter(f"{XML_PREFIX}instrText"):
-                    print(child)
-                    """print("p - instrText")
-                    print(child)"""
+                    match child.text:
+                        # This case handles Text Form Fields
+                        case InstrTextOptions.FORM_TEXT:
+                            print("FORM_TEXT")
+
+                        # This case handles Check Box Form Fields
+                        case InstrTextOptions.FORM_CHECKBOX:
+                            print("FORM_CHECKBOX")
+
+                        # This case handles Drop Down Form Fields
+                        case InstrTextOptions.FORM_DROPDOWN:
+                            print("FORM_DROPDOWN")
 
                 """OLD START
                 first_child: str = parent_tag.getchildren()[0].tag
