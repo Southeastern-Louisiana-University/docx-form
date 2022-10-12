@@ -290,15 +290,7 @@ class DocxForm:
                         case InstrTextOptions.FORM_DROPDOWN:
                             print("FORM_DROPDOWN")
 
-                """OLD START
-                first_child: str = parent_tag.getchildren()[0].tag
-                if first_child == f"{XML_PREFIX}sdt":
-                    return CheckBoxContentControl(
-                        parent_tag.getchildren()[0], self.file_path
-                    )
-                else:
-                    return None
-                OLD END"""
+                return None
 
 
 # Use this for debugging, then move to a test file.
