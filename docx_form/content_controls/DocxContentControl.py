@@ -19,51 +19,24 @@ class DocxContentControl:
         self.id = self.__get_id()
         self.text = self.__get_text()
 
-    # Note: May need to account for the id not being the first child
     def __get_id(self) -> str:
-        root_children: list[Element] = self.root.getchildren()
-        id_element: Element = root_children[0].getchildren()[0]
-        return id_element.attrib[f"{XML_PREFIX}val"]
+        """
+        Return the value of the id tag
+        """
+        child: Element
+        for child in self.root.iter(f"{XML_PREFIX}id"):
+            return child.attrib[f"{XML_PREFIX}val"]
+
+        # TODO: Raise an error if the id is not found
+        return "NOT FOUND"
 
     def __get_text(self) -> str:
-        root_children: list[Element] = self.root.getchildren()
+        """
+        Return the value of each text tag concatenated
+        """
+        child: Element
+        tag_text: str = ""
+        for child in self.root.iter(f"{XML_PREFIX}t"):
+            tag_text += child.text
 
-        # Find the <w:sdtContent> tag
-        sdt_content_tag: Element
-        for child in root_children:
-            if "sdtContent" in child.tag:
-                sdt_content_tag = child
-                break
-
-        # <w:sdtContent> to <w:p>
-        text_container: list[Element] = sdt_content_tag.getchildren()[0]
-
-        # If the tag is a <w:r> tag, then it is a CheckBoxContentControl
-        text: str = ""
-        if text_container.tag == f"{XML_PREFIX}r":
-            # Find the <w:t> tag
-            w_t_tag: Element
-            child_tag: Element
-            for child_tag in text_container.getchildren():
-                if f"{XML_PREFIX}t" == child_tag.tag:
-                    w_t_tag = child_tag
-                    break
-
-            # Append the text
-            text += w_t_tag.text
-        # If it is not a CheckBoxContentControl
-        else:
-            text_container = text_container.getchildren()
-            # For each <w:r> tag, get the text in the <w:t> tag
-            for tag in text_container:
-                # Find the <w:t> tag
-                w_t_tag: Element
-                for child_tag in tag.getchildren():
-                    if f"{XML_PREFIX}t" == child_tag.tag:
-                        w_t_tag = child_tag
-                        break
-
-                # Append the text
-                text += w_t_tag.text
-
-        return text
+        return tag_text
