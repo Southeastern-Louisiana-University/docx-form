@@ -1,4 +1,3 @@
-# Local Imports
 try:
     from constants import XML_PREFIX
     from type_aliases import Element
@@ -9,7 +8,7 @@ except ImportError:
 
 class DocxContentControl:
     """
-    This is the parent class of all content controls.
+    This is the parent class of all supported content controls.
     It is responsible for getting the id and text of the content control.
     """
 

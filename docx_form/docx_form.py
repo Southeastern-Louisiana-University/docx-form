@@ -138,10 +138,10 @@ class DocxForm:
         with ZipFile(self.file_path) as document:
             # Put the raw xml into an xml file for testing
             # TODO: Delete when publishing package
-            """full_path = (
-                "C:/Users/reece/Desktop/test_file.xml"  # TODO: Delete me!
-            )"""
-            full_path = ""
+            full_path = (
+                "C:/Users/reece/Desktop/change_cat_request.xml"  # TODO: Delete me!
+            )
+            # full_path = ""
             if len(full_path) > 0:
                 with open(full_path, "wb") as f:
                     f.write(document.read("word/document.xml"))
