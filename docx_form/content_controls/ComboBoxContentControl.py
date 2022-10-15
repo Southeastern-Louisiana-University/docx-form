@@ -16,4 +16,3 @@ class ComboBoxContentControl(DocxContentControl):
 
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
-        self.type = "ComboBox Content Control"

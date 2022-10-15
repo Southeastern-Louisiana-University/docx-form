@@ -3,9 +3,8 @@ from zipfile import ZipFile
 from lxml import etree
 import re, os
 
-# Local Imports
 try:
-    from enums import TagType, InstrTextOptions
+    from enums import TagType
     from content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
@@ -14,11 +13,12 @@ try:
         CheckBoxContentControl,
         DatePickerContentControl,
     )
+    from form_fields import TextFormField, CheckBoxFormField, DropDownFormField
     from constants import XML_PREFIX, XML_CHECK
     from globals import Raw_XML
     from type_aliases import Element
 except ImportError:
-    from .enums import TagType, InstrTextOptions
+    from .enums import TagType
     from .content_controls import (
         PlainTextContentControl,
         RichTextContentControl,
@@ -27,6 +27,7 @@ except ImportError:
         CheckBoxContentControl,
         DatePickerContentControl,
     )
+    from .form_fields import TextFormField, CheckBoxFormField, DropDownFormField
     from .constants import XML_PREFIX, XML_CHECK
     from .globals import Raw_XML
     from .type_aliases import Element
@@ -40,6 +41,7 @@ ContentControl = (
     | DropDownListContentControl
     | PlainTextContentControl
 )
+FormField = CheckBoxFormField | DropDownFormField | TextFormField
 
 
 class DocxForm:
@@ -57,9 +59,9 @@ class DocxForm:
 
         self.file_path: str = self.__verify_path(file_path)
         Raw_XML.raw_xml = self.__get_raw_xml()
-        self.content_control_forms: list[
-            ContentControl
-        ] = self.__get_all_content_control_forms()
+        self.content_control_forms_and_form_fields: list[
+            ContentControl | FormField
+        ] = self.__get_all_content_control_forms_and_form_fields()
 
     def save(self, destination_path: str | None = None):
         """
@@ -109,24 +111,35 @@ class DocxForm:
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
-    def list_all_content_controls(self):
+    def list_all_content_controls_and_form_fields(self):
         """
-        This method prints all content controls in the document.
+        This method prints all content controls and form fields in the document.
         """
 
         # Track current array index in for loop
         pos = 0
         # print values from each control with the index in content_control_forms
-        for control in self.content_control_forms:
-            print(
-                str(pos)
-                + ": "
-                + control.type
-                + ". id: "
-                + control.id
-                + ". text: "
-                + control.text
-            )
+        for control in self.content_control_forms_and_form_fields:
+            if isinstance(control, ContentControl):
+                print(
+                    str(pos)
+                    + ": "
+                    + control.__class__.__name__
+                    + " | id: "
+                    + control.id
+                    + " | text: "
+                    + control.text
+                )
+            else:
+                print(
+                    str(pos)
+                    + ": "
+                    + control.__class__.__name__
+                    + " | name: "
+                    + control.name
+                    + " | value: "
+                    + control.value
+                )
             pos = pos + 1
 
     def __get_raw_xml(self) -> str:
@@ -137,11 +150,7 @@ class DocxForm:
         """
         with ZipFile(self.file_path) as document:
             # Put the raw xml into an xml file for testing
-            # TODO: Delete when publishing package
-            full_path = (
-                "C:/Users/reece/Desktop/change_cat_request.xml"  # TODO: Delete me!
-            )
-            # full_path = ""
+            full_path = ""
             if len(full_path) > 0:
                 with open(full_path, "wb") as f:
                     f.write(document.read("word/document.xml"))
@@ -150,13 +159,13 @@ class DocxForm:
                 "word/document.xml"
             )  # .decode("utf-8") this creates problems for some reason
 
-    def __verify_path(self, file_path: str):
+    def __verify_path(self, file_path: str) -> str:
         """
         This method verifies that the file path is valid.
 
         :param str file_path: The path to the document
         :raises Exception: If the file path is not to a .docx file
-        :return _type_: The file path
+        :return str: The file path
         """
         # regex to check for docx extension in file path
         verify = re.compile("\\.docx$")
@@ -180,7 +189,7 @@ class DocxForm:
 
         return file_path
 
-    def __get_all_content_control_forms(self) -> list[ContentControl]:
+    def __get_all_content_control_forms_and_form_fields(self) -> list[ContentControl]:
         """
         This method returns all content control forms in the document.
 
@@ -202,52 +211,39 @@ class DocxForm:
                 )
 
             # Find all form fields in the document
-            form_field: Element
-            for form_field in body.iter(f"{XML_PREFIX}p"):
-                content_control_forms.append(
-                    self.__determine_content_control(form_field, TagType.P)
-                )
-
-            """ OLD START
-            # Loop through all tags within the <body> tag
-            parent_tag: Element
-            for parent_tag in body:
-                # If the tag is a <w:sdt> tag, then it is a form field
-                if parent_tag.tag == f"{XML_PREFIX}sdt":
+            p_tag: Element
+            for p_tag in body.iter(f"{XML_PREFIX}p"):
+                """
+                Note: The same <w:p> tag can be used for multiple checkboxes depending on the document.
+                The name value will differentiate them.
+                """
+                child: Element
+                for child in p_tag.iter(f"{XML_PREFIX}name"):
                     content_control_forms.append(
-                        self.__determine_content_control(parent_tag, TagType.SDT)
+                        self.__determine_content_control(
+                            p_tag, TagType.P, child.get(f"{XML_PREFIX}val")
+                        )
                     )
-
-                # Also, if a <w:p> tag has a <w:sdt> tag as a child, then it is a Check Box Content Control
-                if (
-                    parent_tag.tag == f"{XML_PREFIX}p"
-                    and len(parent_tag.getchildren()) > 0
-                ):
-                    content_control_forms.append(
-                        self.__determine_content_control(parent_tag, TagType.P)
-                    )
-
-            OLD END """
 
             # Remove the None values from the list ()
             content_control_forms = [x for x in content_control_forms if x is not None]
 
             return content_control_forms
 
-    # Note: this will have a specific return type in a later version that corresponds to the type of content control
     def __determine_content_control(
-        self, parent_tag: Element, tag_type: TagType
-    ) -> ContentControl | None:
+        self, parent_tag: Element, tag_type: TagType, name: str = ""
+    ) -> ContentControl | FormField | None:
         """
         This method determines the type of content control and returns the appropriate object.
 
         :param Element parent_tag: The parent tag of the content control. This will be a <w:sdt> tag or a <w:p> tag.
         :param TagType tag_type: The type of tag that the content control is in. This will be either SDT or P.
-        :return ContentControl | None: The content control object
+        :param str name: The name of the content control. This is only used for form fields.
+        :return: The content control or form field object
+        :rtype: ContentControl | FormField | None
         """
 
         child: Element
-
         match tag_type:
             # This case handles all Content Control types
             case TagType.SDT:
@@ -274,31 +270,24 @@ class DocxForm:
                 # Otherwise, it is a Rich Text Content Control
                 return RichTextContentControl(parent_tag, self.file_path)
 
-            # This case handles all Form Field types
+            # This case handles all Form Fields
             case TagType.P:
-                for child in parent_tag.iter(f"{XML_PREFIX}instrText"):
-                    match child.text:
-                        # This case handles Text Form Fields
-                        case InstrTextOptions.FORM_TEXT:
-                            print("FORM_TEXT")
+                # Find a Text Form Field if it exists
+                for child in parent_tag.iter(f"{XML_PREFIX}textInput"):
+                    return TextFormField(parent_tag, self.file_path, name)
 
-                        # This case handles Check Box Form Fields
-                        case InstrTextOptions.FORM_CHECKBOX:
-                            print("FORM_CHECKBOX")
+                # Find a Drop Down Form Field if it exists
+                for child in parent_tag.iter(f"{XML_PREFIX}ddList"):
+                    return DropDownFormField(parent_tag, self.file_path, name)
 
-                        # This case handles Drop Down Form Fields
-                        case InstrTextOptions.FORM_DROPDOWN:
-                            print("FORM_DROPDOWN")
-
-                return None
+                # Find a Check Box Form Field if it exists
+                for child in parent_tag.iter(f"{XML_PREFIX}checkBox"):
+                    # return CheckBoxFormField(parent_tag, self.file_path, name)
+                    # TODO: Find a way to differentiate checkboxes from each other reliably
+                    return None
 
 
 # Use this for debugging, then move to a test file.
 # This will run if you run this file directly.
 if __name__ == "__main__":
-    full_path = "C:/Users/reece/Desktop/change_cat_request.docx"
-    # full_path = "C:/Users/reece/git_repos/docx-form/docx_form_tests/test.docx"
-    document = DocxForm(full_path)
-
-    # Print all content control forms
-    # document.list_all_content_controls()
+    ...
