@@ -24,7 +24,7 @@ class PlainTextContentControl(DocxContentControl):
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
 
-    def set_text(self, new_text: str):
+    def set_text(self, new_text: str) -> None:
         """
         This method sets the text of a Plain Text content control.
 
