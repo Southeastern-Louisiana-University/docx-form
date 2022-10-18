@@ -85,11 +85,11 @@ class ComboBoxContentControl(DocxContentControl):
         else:
             print("No options found")
 
-    def set_text(self, new_text: str) -> None:
+    def set_text(self, option_index: int) -> None:
         """
         This method sets the text of a ComboBox content control.
 
-        :param str new_text: The new text to set
+        :param int option_index: The index of the new text to set
         """
 
         # The root of the document
@@ -108,23 +108,13 @@ class ComboBoxContentControl(DocxContentControl):
                     content_tag: Element = element.find(f"{XML_PREFIX}sdtContent")
 
                     # TODO: Test this in case it is not a universal index
+                    # Dig to the t tag
                     p_tag: Element = content_tag.getchildren()[0]
-                    p_tag_attributes = p_tag.attrib
+                    r_tag: Element = p_tag.getchildren()[0]
+                    t_tag: Element = r_tag.getchildren()[0]
 
-                    # Make a new <w:p> tag with the same attributes as the old one
-                    new_w_p_tag: Element = etree.Element(
-                        f"{XML_PREFIX}p", p_tag_attributes
-                    )
-
-                    # Append a <w:r> tag with a <w:t> tag inside it
-                    new_w_r_tag: Element = etree.Element(f"{XML_PREFIX}r")
-                    new_w_t_tag: Element = etree.Element(f"{XML_PREFIX}t")
-                    new_w_t_tag.text = new_text
-                    new_w_r_tag.append(new_w_t_tag)
-                    new_w_p_tag.append(new_w_r_tag)
-
-                    # Replace the old <w:p> tag with the new one
-                    content_tag.replace(p_tag, new_w_p_tag)
+                    # Replace the old text with the new option
+                    t_tag.text = self.options[option_index].value
 
         # Write the new document to raw_xml
         Raw_XML.raw_xml = etree.tostring(root)
