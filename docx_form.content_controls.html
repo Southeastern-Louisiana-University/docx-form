@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>docx_form.content_controls package &#8212; docx-form 0.1.2 documentation</title>
+    <title>docx_form.content_controls package &#8212; docx-form 0.1.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="docx_form.constants.html" title="docx_form.constants package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.1.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.1.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >docx-form</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="docx_form.html" accesskey="U">docx_form package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">docx_form.content_controls package</a></li> 
@@ -91,6 +91,38 @@
 <dd class="field-odd"><p><strong>DocxContentControl</strong> – This class extends the DocxContentControl class</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.ComboBoxContentControl.ComboBoxContentControl.print_options">
+<span class="sig-name descname"><span class="pre">print_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.ComboBoxContentControl.ComboBoxContentControl.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method prints the options of a ComboBox content control.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.ComboBoxContentControl.ComboBoxContentControl.set_text">
+<span class="sig-name descname"><span class="pre">set_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">option_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.ComboBoxContentControl.ComboBoxContentControl.set_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the text of a ComboBox content control.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>option_index</strong> (<em>int</em>) – The index of the new text to set</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="docx_form.content_controls.ComboBoxContentControl.ComboBoxOption">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">docx_form.content_controls.ComboBoxContentControl.</span></span><span class="sig-name descname"><span class="pre">ComboBoxOption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.ComboBoxContentControl.ComboBoxOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class contains all properties and methods for a ComboBox list item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display_text</strong> (<em>str</em>) – The display text of the option</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – The value of the option</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -106,6 +138,22 @@
 <dd class="field-odd"><p><strong>DocxContentControl</strong> – This class extends the DocxContentControl class</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date">
+<span class="sig-name descname"><span class="pre">set_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the date of a DatePicker content control using a datetime object.
+The format of the date is determined by the date_format property.
+Make sure to supply a valid format string that strftime can use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>new_date</strong> (<em>datetime</em>) – The new date to set.</p></li>
+<li><p><strong>desired_format</strong> (<em>str</em>) – The desired format of the date.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -115,7 +163,7 @@
 <dt class="sig sig-object py" id="docx_form.content_controls.DocxContentControl.DocxContentControl">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">docx_form.content_controls.DocxContentControl.</span></span><span class="sig-name descname"><span class="pre">DocxContentControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">_Element</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.DocxContentControl.DocxContentControl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This is the parent class of all content controls.
+<p>This is the parent class of all supported content controls.
 It is responsible for getting the id and text of the content control.</p>
 </dd></dl>
 
@@ -130,6 +178,38 @@ It is responsible for getting the id and text of the content control.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>DocxContentControl</strong> – This class extends the DocxContentControl class</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.DropDownListContentControl.DropDownListContentControl.print_options">
+<span class="sig-name descname"><span class="pre">print_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.DropDownListContentControl.DropDownListContentControl.print_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method prints the options of a Drop-Down List content control.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.DropDownListContentControl.DropDownListContentControl.set_option">
+<span class="sig-name descname"><span class="pre">set_option</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_option</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.DropDownListContentControl.DropDownListContentControl.set_option" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the text of a Drop-Down List content control</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_option</strong> (<em>int</em>) – The option to set (index from the print_options() method)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="docx_form.content_controls.DropDownListContentControl.DropDownOption">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">docx_form.content_controls.DropDownListContentControl.</span></span><span class="sig-name descname"><span class="pre">DropDownOption</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">display_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.DropDownListContentControl.DropDownOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class contains all properties and methods for a Drop-Down list item.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>display_text</strong> (<em>str</em>) – The display text of the option</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – The value of the option</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -149,7 +229,7 @@ It is responsible for getting the id and text of the content control.</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="docx_form.content_controls.PlainTextContentControl.PlainTextContentControl.set_text">
-<span class="sig-name descname"><span class="pre">set_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.PlainTextContentControl.PlainTextContentControl.set_text" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.PlainTextContentControl.PlainTextContentControl.set_text" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method sets the text of a Plain Text content control.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -173,6 +253,17 @@ It is responsible for getting the id and text of the content control.</p>
 <dd class="field-odd"><p><strong>DocxContentControl</strong> – This class extends the DocxContentControl class</p>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="docx_form.content_controls.RichTextContentControl.RichTextContentControl.set_text">
+<span class="sig-name descname"><span class="pre">set_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.RichTextContentControl.RichTextContentControl.set_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method sets the text of a Plain Text content control.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new_text</strong> (<em>str</em>) – The new text to set</p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -252,7 +343,7 @@ It is responsible for getting the id and text of the content control.</p>
         <li class="right" >
           <a href="docx_form.constants.html" title="docx_form.constants package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.1.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.1.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >docx-form</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="docx_form.html" >docx_form package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">docx_form.content_controls package</a></li> 

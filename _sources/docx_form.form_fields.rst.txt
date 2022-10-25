@@ -1,0 +1,45 @@
+docx\_form.form\_fields package
+===============================
+
+Submodules
+----------
+
+docx\_form.form\_fields.CheckBoxFormField module
+------------------------------------------------
+
+.. automodule:: docx_form.form_fields.CheckBoxFormField
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+docx\_form.form\_fields.DocxFormField module
+--------------------------------------------
+
+.. automodule:: docx_form.form_fields.DocxFormField
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+docx\_form.form\_fields.DropDownFormField module
+------------------------------------------------
+
+.. automodule:: docx_form.form_fields.DropDownFormField
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+docx\_form.form\_fields.TextFormField module
+--------------------------------------------
+
+.. automodule:: docx_form.form_fields.TextFormField
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: docx_form.form_fields
+   :members:
+   :undoc-members:
+   :show-inheritance:
