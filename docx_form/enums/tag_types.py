@@ -7,5 +7,6 @@ class TagType(Enum):
 
     :param Enum: This is the generic Enum class from the enum module
     """
+
     SDT = "sdt"
     P = "p"
