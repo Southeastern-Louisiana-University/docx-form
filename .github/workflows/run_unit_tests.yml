@@ -1,6 +1,6 @@
 # This workflow runs tests on pull requests to the main & development branch.
 
-name: Test Pull Request
+name: Run Unit Tests
 
 # Controls when the workflow will run
 on:
