@@ -72,13 +72,13 @@ document.list_all_content_controls_and_form_fields()
 11: DatePickerContentControl | id: 539787165 | text: 9/7/2022
 ```
 
-    **Note: The Content Controls are listed starting from the top-left of the document going from left to right on each line of the document all the way to the bottom.**
+**Note: The Content Controls are listed starting from the top-left of the document going from left to right on each line of the document all the way to the bottom.**
 
 6. Edit the second Rich Text Content Control:
 
 ```python
 ...
- # Import type for proper intellisense in your editor/IDE
+# Import type for proper intellisense in your editor/IDE
 from docx_form.content_controls import RichTextContentControl
 ...
 rich_text_control: RichTextContentControl = document.content_control_forms_and_form_fields[1]
@@ -89,7 +89,7 @@ rich_text_control.set_text("The example worked!")
 
 ```python
 ...
- # Note: This will overwrite the original file
+# Note: This will overwrite the original file
 document.save()
 ```
 
@@ -107,20 +107,20 @@ document.save()
 from docx_form import DocxForm
 from docx_form.content_controls import RichTextContentControl
 
- # Create a DocxForm instance
+# Create a DocxForm instance
 full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
- # Kept for reference
- # document.list_all_content_controls_and_form_fields()
+# Kept for reference
+# document.list_all_content_controls_and_form_fields()
 
- # Edit the second Rich Text content control
+# Edit the second Rich Text content control
 rich_text_control: RichTextContentControl = (
     document.content_control_forms_and_form_fields[1]
 )
 rich_text_control.set_text("The example worked!")
 
- # Note: This will overwrite the original file
+# Note: This will overwrite the original file
 document.save()
 ```
 
@@ -288,6 +288,12 @@ The following will be done in Visual Studio Code on a Windows machine:
 5. Open `./docx_form/docx_form.py` (This is the root file, so do any local testing within the `if __name__ == "__main__":` scope)
 6. Click the `Run` button in the top-right of the editor (assuming the [Python Extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed)
    1. If no errors are thrown, you are ready to execute locally and using poetry!
+7. Open a `Git Bash` terminal in the repository's root
+   1. Run `curl -o- https://raw.githubusercontent.com/tapsellorg/conventional-commits-git-hook/master/scripts/install.sh | sh`
+      1. Here is the repository for the git hook: [conventional-commits-git-hook](https://github.com/BrianGilbert/conventional-commits-git-hook)
+   2. Run `git init`
+   3. You now have the git hook installed to ensure proper commit messages
+      1. Follow [these guidelines](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages
 
 #### Code Style Guide
 
