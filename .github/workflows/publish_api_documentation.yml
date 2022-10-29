@@ -1,6 +1,6 @@
 # This workflow builds & deploys API documentation on pull requests to the main branch.
 
-name: Publish API
+name: Publish API Documentation
 
 # Controls when the workflow will run
 on:
