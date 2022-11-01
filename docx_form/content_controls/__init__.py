@@ -4,4 +4,6 @@ from .DatePickerContentControl import DatePickerContentControl
 from .DropDownListContentControl import DropDownListContentControl
 from .PlainTextContentControl import PlainTextContentControl
 from .RichTextContentControl import RichTextContentControl
+from .OptionalContentControl import OptionalContentControl
+from .TextualContentControl import TextualContentControl
 from .DocxContentControl import DocxContentControl
