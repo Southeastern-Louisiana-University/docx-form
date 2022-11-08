@@ -168,7 +168,7 @@ document = DocxForm(full_path)
 content_control: CheckBoxContentControl = (
     document.content_control_forms_and_form_fields[4]
 )
-content_control.set_checkBox(True)
+content_control.set_check_box(True)
 
 # Note: This will overwrite the original file
 document.save()
