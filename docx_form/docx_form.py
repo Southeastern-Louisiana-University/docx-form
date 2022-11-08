@@ -95,6 +95,12 @@ class DocxForm:
             # Rename the temporary docx to match the original name
             os.renames(temp_path, self.file_path)
 
+            # Clear the content control list and get new values
+            self.content_control_forms_and_form_fields.clear()
+            self.content_control_forms_and_form_fields = (
+                self.__get_all_content_control_forms_and_form_fields()
+            )
+
         # Saves to a new file -- uses path as destination, relative path does work
         else:
             # Replace document path with the destination path
@@ -110,6 +116,13 @@ class DocxForm:
                         new_doc.writestr(item, old_doc.read(item.filename))
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
+
+            # Clear the content control list and get new values for new path
+            self.file_path = new_path
+            self.content_control_forms_and_form_fields.clear()
+            self.content_control_forms_and_form_fields = (
+                self.__get_all_content_control_forms_and_form_fields()
+            )
 
     def list_all_content_controls_and_form_fields(self):
         """
