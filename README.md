@@ -235,8 +235,6 @@ document.save()
 
 ### Date Picker
 
-**Note: A simpler API is planned for full release**
-
 ```python
 from datetime import datetime
 from docx_form import DocxForm
@@ -255,8 +253,7 @@ content_control: DatePickerContentControl = (
 )
 print(content_control.date_format) # Output: "M/d/yyyy"
 new_date = datetime(1999, 12, 31)
-format = "%m/%d/%Y" # Create a format for strftime() based on the date_format property
-content_control.set_date(new_date, format)
+content_control.set_date(new_date)
 
 # Note: This will overwrite the original file
 document.save()
