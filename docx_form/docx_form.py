@@ -117,12 +117,8 @@ class DocxForm:
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
-            # Clear the content control list and get new values for new path
-            self.file_path = new_path
-            self.content_control_forms_and_form_fields.clear()
-            self.content_control_forms_and_form_fields = (
-                self.__get_all_content_control_forms_and_form_fields()
-            )
+            # Return new Docx-Form instance
+            return DocxForm(new_path)
 
     def list_all_content_controls_and_form_fields(self):
         """
