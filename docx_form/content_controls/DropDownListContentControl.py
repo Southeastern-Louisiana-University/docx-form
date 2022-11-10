@@ -16,4 +16,4 @@ class DropDownListContentControl(OptionalContentControl):
 
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
-        self.options = self.__get_options()
+        self.options = self.get_options()
