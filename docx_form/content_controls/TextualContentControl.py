@@ -13,6 +13,7 @@ except ImportError:
     from ..constants import XML_PREFIX
     from ..globals import Raw_XML
 
+
 class TextualContentControl(DocxContentControl):
     """
     This class contains all properties and methods for an textual content control.
@@ -66,3 +67,4 @@ class TextualContentControl(DocxContentControl):
 
         # Write the new document to raw_xml
         Raw_XML.raw_xml = etree.tostring(root)
+        self.text = new_text
