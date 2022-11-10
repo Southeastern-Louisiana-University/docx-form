@@ -24,7 +24,7 @@ class CheckBoxContentControl(DocxContentControl):
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
 
-    def set_checkBox(self, check_value: bool):
+    def set_check_box(self, check_value: bool):
         """
         This method sets a checkbox to checked or unchecked on a CheckBox Content Control
 
