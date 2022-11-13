@@ -11,7 +11,7 @@ def test_save():
     test.list_all_content_controls_and_form_fields()
     element = test.content_control_forms_and_form_fields[2]
     element.set_text("Hello World")
-    test_changes = test.save("./docx_form_tests/test-m.docx")
+    test.save("./docx_form_tests/test-m.docx")
     with ZipFile("./docx_form_tests/test-m.docx") as compare:
         new_contents = compare.read("word/document.xml")
 
