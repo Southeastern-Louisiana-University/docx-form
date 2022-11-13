@@ -237,5 +237,9 @@ class DatePickerContentControl(DocxContentControl):
                     # Replace the old <w:p> tag with the new one
                     content_tag.replace(p_tag, new_w_p_tag)
 
+        # Update class variable
+        self.full_date = new_date
+        self.text = new_date.strftime(desired_format)
+
         # Update the raw xml
         Raw_XML.raw_xml = etree.tostring(root, encoding="unicode")
