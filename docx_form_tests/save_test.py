@@ -1,5 +1,6 @@
 from docx_form import DocxForm
 from zipfile import ZipFile
+from os import remove
 
 
 def test_save():
