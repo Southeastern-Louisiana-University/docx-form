@@ -17,3 +17,6 @@ def test_save():
         new_contents = compare.read("word/document.xml")
 
     assert (new_contents != old_contents)
+    
+    # Remove the test file created
+    remove("./docx_form_tests/test-m.docx")
