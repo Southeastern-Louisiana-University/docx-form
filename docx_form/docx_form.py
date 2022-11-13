@@ -111,7 +111,7 @@ class DocxForm:
                 # Write changes to new docx
                 new_doc.writestr("word/document.xml", Raw_XML.raw_xml)
 
-    def list_all_content_controls_and_form_fields(self):
+    def print_all_content_controls_and_form_fields(self):
         """
         This method prints all content controls and form fields in the document.
         """
