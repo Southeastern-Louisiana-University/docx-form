@@ -28,9 +28,6 @@ def test_set_date():
     new_date_formatted = element.text
     new_date_utc = element.full_date
 
-    print(f"Original date: {original_date_formatted} ({original_date_utc})")
-    print(f"New date: {new_date_formatted} ({new_date_utc})")
-
     # Check For Change
     assert new_date_formatted != original_date_formatted
     assert new_date_utc != original_date_utc
