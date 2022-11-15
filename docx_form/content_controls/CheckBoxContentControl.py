@@ -62,3 +62,4 @@ class CheckBoxContentControl(DocxContentControl):
 
         # Write the new document to raw_xml
         Raw_XML.raw_xml = etree.tostring(root)
+        self.text = box

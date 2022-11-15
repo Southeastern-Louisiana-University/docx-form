@@ -15,7 +15,7 @@ class DropDownFormField(DocxFormField):
     """
 
     def __init__(self, root: Element, file_path: str, name: str) -> None:
-        super.__init__(root, file_path, name)
+        super().__init__(root, file_path, name)
         self.value = "Not currently supported"
         self.entries = self.__get_entries()
 
