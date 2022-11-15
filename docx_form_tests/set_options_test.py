@@ -8,9 +8,6 @@ def test_set_options():
     # Set element to a control with options
     element = test.content_control_forms_and_form_fields[8]
 
-    # Display options
-    element.print_options()
-
     # Select option and change text
     element.set_option(2)
 
