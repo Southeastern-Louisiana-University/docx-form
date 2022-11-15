@@ -36,8 +36,9 @@ class OptionalContentControl(DocxContentControl):
 
     def __init__(self, root: Element, file_path: str):
         super().__init__(root, file_path)
+        self.options = self.__get_options()
 
-    def get_options(self) -> list[Option] | None:
+    def __get_options(self) -> list[Option] | None:
         """
         This method gets the options of a optional content control.
 

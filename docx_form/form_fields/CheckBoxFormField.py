@@ -15,7 +15,7 @@ class CheckBoxFormField(DocxFormField):
     """
 
     def __init__(self, root: Element, file_path: str, name: str) -> None:
-        super.__init__(root, file_path, name)
+        super().__init__(root, file_path, name)
         self.value = self.__get_is_checked()
 
     def __get_is_checked(self) -> str:
