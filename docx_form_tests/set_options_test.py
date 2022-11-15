@@ -14,9 +14,6 @@ def test_set_options():
     # Select option and change text
     element.set_option(2)
 
-
     # Check for changes
     compare = "Optional-Test"
     assert element.text == compare
-
-test_set_options()
