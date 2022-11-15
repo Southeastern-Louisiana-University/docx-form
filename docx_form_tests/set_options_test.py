@@ -2,7 +2,7 @@ from docx_form import DocxForm
 
 def test_set_options():
     # Initialize docx-form instance
-    path = "C:/Users/rherb/OneDrive/Desktop/test.docx"
+    path = "./docx_form_tests/test.docx"
     test = DocxForm(path)
     
     # Set element to a control with options
@@ -10,11 +10,13 @@ def test_set_options():
 
     # Display options
     element.print_options()
-    print(element.text)
 
     # Select option and change text
-    element.set_option(1)
-    print(element.text)
+    element.set_option(2)
+
 
     # Check for changes
-    assert element.text == ""
+    compare = "Optional-Test"
+    assert element.text == compare
+
+test_set_options()
