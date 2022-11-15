@@ -120,7 +120,9 @@ class DocxForm:
             # Return new Docx-Form instance
             return DocxForm(new_path)
 
+
     def print_all_content_controls_and_form_fields(self):
+
         """
         This method prints all content controls and form fields in the document.
         """

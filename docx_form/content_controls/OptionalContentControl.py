@@ -118,3 +118,4 @@ class OptionalContentControl(DocxContentControl):
 
         # Write the new document to raw_xml
         Raw_XML.raw_xml = etree.tostring(root)
+        self.text = self.options[new_option].value
