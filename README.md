@@ -93,7 +93,7 @@ rich_text_control.set_text("The example worked!")
 document.save()
 ```
 
-8. If `document.list_all_content_controls_and_form_fields()` is run again:
+8. If `document.print_all_content_controls_and_form_fields()` is run again:
 
 ```
 ...
@@ -112,7 +112,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the second Rich Text content control
 rich_text_control: RichTextContentControl = (
@@ -139,7 +139,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the content control (remember the console output)
 content_control: PlainTextContentControl = (
@@ -162,7 +162,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the content control (remember the console output)
 content_control: CheckBoxContentControl = (
@@ -185,7 +185,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the content control (remember the console output)
 content_control: ComboBoxContentControl = (
@@ -215,7 +215,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the content control (remember the console output)
 content_control: DropDownListContentControl = (
@@ -245,7 +245,7 @@ full_path = "path/to/docx/file/test.docx"
 document = DocxForm(full_path)
 
 # Kept for reference
-# document.list_all_content_controls_and_form_fields()
+# document.print_all_content_controls_and_form_fields()
 
 # Edit the content control (remember the console output)
 content_control: DatePickerContentControl = (
