@@ -48,11 +48,11 @@ full_path = 'path/to/docx/file/test.docx'
 document = DocxForm(full_path)
 ```
 
-4. List the content controls:
+4. Print the content controls:
 
 ```python
 ...
-document.list_all_content_controls_and_form_fields()
+document.print_all_content_controls_and_form_fields()
 ```
 
 5. View the console output & make note of the indexes:
