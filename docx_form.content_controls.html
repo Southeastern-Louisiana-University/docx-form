@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>docx_form.content_controls package &#8212; docx-form 0.2.0 documentation</title>
+    <title>docx_form.content_controls package &#8212; docx-form 1.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/classic.css" />
     
@@ -15,6 +15,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -36,7 +37,7 @@
         <li class="right" >
           <a href="docx_form.constants.html" title="docx_form.constants package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">docx-form 1.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >docx-form</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="docx_form.html" accesskey="U">docx_form package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">docx_form.content_controls package</a></li> 
@@ -66,8 +67,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl.set_checkBox">
-<span class="sig-name descname"><span class="pre">set_checkBox</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl.set_checkBox" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl.set_check_box">
+<span class="sig-name descname"><span class="pre">set_check_box</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">check_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl.set_check_box" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method sets a checkbox to checked or unchecked on a CheckBox Content Control</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -108,16 +109,16 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date">
-<span class="sig-name descname"><span class="pre">set_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">desired_format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method sets the date of a DatePicker content control using a datetime object.
 The format of the date is determined by the date_format property.
 Make sure to supply a valid format string that strftime can use.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>new_date</strong> (<em>datetime</em>) – The new date to set.</p></li>
-<li><p><strong>desired_format</strong> (<em>str</em>) – The desired format of the date.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>new_date</strong> (<em>datetime</em>) – The new date to set.</p>
+</dd>
+<dt class="field-even">Return None<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
@@ -198,13 +199,40 @@ It is responsible for getting the id and text of the content control.</p>
     <ul>
 <li><a class="reference internal" href="#">docx_form.content_controls package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.CheckBoxContentControl">docx_form.content_controls.CheckBoxContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.ComboBoxContentControl">docx_form.content_controls.ComboBoxContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.DatePickerContentControl">docx_form.content_controls.DatePickerContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.DocxContentControl">docx_form.content_controls.DocxContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.DropDownListContentControl">docx_form.content_controls.DropDownListContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.PlainTextContentControl">docx_form.content_controls.PlainTextContentControl module</a></li>
-<li><a class="reference internal" href="#module-docx_form.content_controls.RichTextContentControl">docx_form.content_controls.RichTextContentControl module</a></li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.CheckBoxContentControl">docx_form.content_controls.CheckBoxContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl"><code class="docutils literal notranslate"><span class="pre">CheckBoxContentControl</span></code></a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.CheckBoxContentControl.CheckBoxContentControl.set_check_box"><code class="docutils literal notranslate"><span class="pre">CheckBoxContentControl.set_check_box()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.ComboBoxContentControl">docx_form.content_controls.ComboBoxContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.ComboBoxContentControl.ComboBoxContentControl"><code class="docutils literal notranslate"><span class="pre">ComboBoxContentControl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.DatePickerContentControl">docx_form.content_controls.DatePickerContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.DatePickerContentControl.DatePickerContentControl"><code class="docutils literal notranslate"><span class="pre">DatePickerContentControl</span></code></a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.DatePickerContentControl.DatePickerContentControl.set_date"><code class="docutils literal notranslate"><span class="pre">DatePickerContentControl.set_date()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.DocxContentControl">docx_form.content_controls.DocxContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.DocxContentControl.DocxContentControl"><code class="docutils literal notranslate"><span class="pre">DocxContentControl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.DropDownListContentControl">docx_form.content_controls.DropDownListContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.DropDownListContentControl.DropDownListContentControl"><code class="docutils literal notranslate"><span class="pre">DropDownListContentControl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.PlainTextContentControl">docx_form.content_controls.PlainTextContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.PlainTextContentControl.PlainTextContentControl"><code class="docutils literal notranslate"><span class="pre">PlainTextContentControl</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-docx_form.content_controls.RichTextContentControl">docx_form.content_controls.RichTextContentControl module</a><ul>
+<li><a class="reference internal" href="#docx_form.content_controls.RichTextContentControl.RichTextContentControl"><code class="docutils literal notranslate"><span class="pre">RichTextContentControl</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-docx_form.content_controls">Module contents</a></li>
 </ul>
 </li>
@@ -257,7 +285,7 @@ It is responsible for getting the id and text of the content control.</p>
         <li class="right" >
           <a href="docx_form.constants.html" title="docx_form.constants package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">docx-form 0.2.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">docx-form 1.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="modules.html" >docx-form</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="docx_form.html" >docx_form package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">docx_form.content_controls package</a></li> 
@@ -265,7 +293,7 @@ It is responsible for getting the id and text of the content control.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2022, Reece Bourgeois, Ryan McClelen, Daniel Howard, and Robert Herbert.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     </div>
   </body>
 </html>
