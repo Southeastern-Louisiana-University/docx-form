@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "docx-form"
-version = "1.0.2"
+version = "1.0.3"
 description = "A library that allows the editing of content control XML components in .docx files."
 authors = ["Reece Bourgeois <reecebourgeois@gmail.com>", "Daniel Howard <daniel.howard@selu.edu>", "Robert Herbert <robert.herbert@selu.edu>", "Ryan McClelen <ryan.mcclelen@selu.edu>"]
 readme = "README.md"
